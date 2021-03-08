@@ -9,4 +9,17 @@ package com.hsicen.lib.linklist
 object NodeUtil {
 
 
+    fun printData(node: Node?) {
+        if (null == node) return
+
+        print("\n开始打印数据: ")
+        var head = node
+        while (null != head) {
+            print("${head.value}\t")
+            head = head.next
+        }
+        println("\n结束打印数据\n")
+    }
+
+
 }
