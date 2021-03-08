@@ -8,6 +8,40 @@ package com.hsicen.lib.linklist
  */
 object NodeUtil {
 
+    fun addNodeHead(node: Node?, data: Int): Node {
+        val head = Node(data)
+        head.next = node
+
+        return head
+    }
+
+    fun addNodeEnd(node: Node?, data: Int): Node {
+        val end = Node(data)
+        if (null == node) return end
+
+        var head = node
+        while (null != head?.next) {
+            head = head.next
+        }
+
+        head?.next = end
+
+        return node
+    }
+
+    fun deleteNode(node: Node?, data: Int): Node? {
+        var head = node
+        while (null != head?.next) {
+            if (data == head.value) {
+
+            }
+
+            head = head.next
+        }
+
+        return node
+    }
+
 
     fun printData(node: Node?) {
         if (null == node) return
@@ -21,5 +55,17 @@ object NodeUtil {
         println("\n结束打印数据\n")
     }
 
+}
 
+fun main() {
+    var head: Node? = null
+
+    head = NodeUtil.addNodeEnd(head, 1)
+    head = NodeUtil.addNodeEnd(head, 2)
+    head = NodeUtil.addNodeEnd(head, 3)
+    head = NodeUtil.addNodeEnd(head, 4)
+    head = NodeUtil.addNodeEnd(head, 4)
+    head = NodeUtil.addNodeEnd(head, 5)
+
+    NodeUtil.printData(head)
 }
