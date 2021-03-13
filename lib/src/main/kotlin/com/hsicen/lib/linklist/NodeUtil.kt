@@ -8,6 +8,7 @@ package com.hsicen.lib.linklist
  */
 object NodeUtil {
 
+    //单链表的常见操作
     fun addNodeHead(node: Node?, data: Int): Node {
         val head = Node(data)
         head.next = node
@@ -30,18 +31,24 @@ object NodeUtil {
     }
 
     fun deleteNode(node: Node?, data: Int): Node? {
-        var head = node
+        if (node?.value == data) {
+            return node.next
+        }
+
+        var pre = node
+        var head = node?.next
         while (null != head?.next) {
             if (data == head.value) {
-
+                pre?.next = head.next
+                return node
             }
 
+            pre = head
             head = head.next
         }
 
         return node
     }
-
 
     fun printData(node: Node?) {
         if (null == node) return
@@ -55,6 +62,22 @@ object NodeUtil {
         println("\n结束打印数据\n")
     }
 
+    //链表的应用
+    fun reverseNode(node: Node?): Node? {
+        if (null == node) return null
+
+        var head = node
+        var newHead: Node? = null
+        while (null != head) {
+            val next = head.next
+            head.next = newHead
+            newHead = head
+            head = next
+        }
+
+        return newHead
+    }
+
 }
 
 fun main() {
@@ -66,6 +89,10 @@ fun main() {
     head = NodeUtil.addNodeEnd(head, 4)
     head = NodeUtil.addNodeEnd(head, 4)
     head = NodeUtil.addNodeEnd(head, 5)
+    head = NodeUtil.deleteNode(head, 3)
 
+    NodeUtil.printData(head)
+
+    head = NodeUtil.reverseNode(head)
     NodeUtil.printData(head)
 }
