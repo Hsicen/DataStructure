@@ -8,11 +8,11 @@ package com.hsicen.lib.linklist
  * 不带头结点
  */
 class LRUCache(private val size: Int = 10) {
-    private var cache: Node? = null
+    private var cache: ListNode? = null
     private var len = 0
 
     private fun insert(data: Int) {
-        val head = Node(data)
+        val head = ListNode(data)
         head.next = cache
         cache = head
         len++
@@ -76,7 +76,7 @@ class LRUCache(private val size: Int = 10) {
     fun add(data: Int) {
         //情况一：当前链表为NULL，直接插入数据
         if (null == cache) {
-            cache = Node(data)
+            cache = ListNode(data)
             len++
             return
         }
@@ -97,7 +97,7 @@ class LRUCache(private val size: Int = 10) {
     }
 
     fun printData() {
-        NodeUtil.printData(cache)
+        printNode(cache)
     }
 }
 
