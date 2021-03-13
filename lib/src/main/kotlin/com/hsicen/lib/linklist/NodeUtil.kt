@@ -78,6 +78,21 @@ object NodeUtil {
         return newHead
     }
 
+    fun checkCircle(node: Node?): Boolean {
+        if (null == node) return false
+
+        var fastStep = node
+        var slowStep = node
+        while (fastStep?.next != null) {
+            fastStep = fastStep.next?.next
+            slowStep = slowStep?.next
+
+            if (fastStep == slowStep) return true
+        }
+
+        return false
+    }
+
 }
 
 fun main() {
