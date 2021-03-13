@@ -40,17 +40,28 @@ fun twoNodeWithSame(listNodeA: ListNode?, listNodeB: ListNode?): ListNode? {
 
 fun main() {
 
+    val same = ListNode(9)
+
     var nodeA = ListNode(1)
     nodeA = addNodeEnd(nodeA, 2)
     nodeA = addNodeEnd(nodeA, 3)
+
+    same.next = nodeA
+    nodeA = same
+
     nodeA = addNodeEnd(nodeA, 4)
     nodeA = addNodeEnd(nodeA, 5)
+
     printNode(nodeA)
 
     var nodeB = ListNode(1)
     nodeB = addNodeHead(nodeB, 2)
     nodeB = addNodeHead(nodeB, 3)
     nodeB = addNodeHead(nodeB, 4)
+
+    same.next = nodeB
+    nodeB = same
+
     nodeB = addNodeHead(nodeB, 5)
     printNode(nodeB)
 
