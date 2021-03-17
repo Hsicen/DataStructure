@@ -29,6 +29,27 @@ fun addNodeEnd(listNode: ListNode?, data: Int): ListNode {
     return listNode
 }
 
+fun addNodeHead(listNode: ListNode?, node: ListNode): ListNode {
+    if (null == listNode) return node
+
+    val newHead = node
+    addNodeEnd(newHead, listNode)
+    return newHead
+}
+
+fun addNodeEnd(listNode: ListNode?, node: ListNode): ListNode {
+    if (null == listNode) return node
+
+    var head = listNode
+    while (null != head?.next) {
+        head = head.next
+    }
+
+    head?.next = node
+
+    return listNode
+}
+
 fun deleteNode(listNode: ListNode?, data: Int): ListNode? {
     if (listNode?.value == data) {
         return listNode.next
