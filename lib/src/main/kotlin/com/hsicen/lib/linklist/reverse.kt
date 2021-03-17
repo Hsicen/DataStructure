@@ -7,12 +7,11 @@ package com.hsicen.lib.linklist
  * 描述：单链表反转相关操作
  */
 
-//反转单链表
+//反转单链表(不带头结点)
 fun reverseNode(listNode: ListNode?): ListNode? {
-    if (null == listNode) return null
-
     var head = listNode
     var newHead: ListNode? = null
+
     while (null != head) {
         val next = head.next
         head.next = newHead
@@ -23,35 +22,37 @@ fun reverseNode(listNode: ListNode?): ListNode? {
     return newHead
 }
 
-//判断是否为回文字符串  利用快慢指针判断
-fun isPalindrome(node: ListNode?): Boolean {
-    if (null == node?.next) return true
 
-    var newHead: ListNode? = null
-    var fast = node
-    var slow = node
+//反转单链表(带头结点)
+fun reverseNodeG(listNode: ListNode): ListNode {
+    val newHead: ListNode = listNode
+    var head: ListNode? = listNode.next
 
-    while (null != fast?.next) {
-        fast = fast.next?.next
-        //反转slow链表
-        val next = slow?.next
-        slow?.next = newHead
-        newHead = slow
-        slow = next
+    newHead.next = null
+    while (head != null) {
+        val next = head.next
+        head.next = newHead.next
+        newHead.next = head
+        head = next
     }
 
-    //链表长度奇偶处理
-    if (null != fast) {
-        slow = slow?.next //链表长度为偶数
-    }
+    return newHead
+}
 
-    //链表前后比较  slow继续往前  newHead从头开始
-    while (null != slow && null != newHead) {
-        if (slow.value != newHead.value) return false
+fun main() {
 
-        slow = slow.next
-        newHead = newHead.next
-    }
+    var head: ListNode? = ListNode(-1)
+    head = addNodeEnd(head, 1)
+    head = addNodeEnd(head, 2)
+    head = addNodeEnd(head, 3)
+    head = addNodeEnd(head, 4)
+    head = addNodeEnd(head, 5)
 
-    return true
+    printNode(head)
+    val newHead = reverseNode(head)
+    printNode(newHead)
+
+    /*printNode(head)
+    val newHead1 = reverseNodeG(head)
+    printNode(newHead1)*/
 }
