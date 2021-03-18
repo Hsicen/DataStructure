@@ -54,7 +54,7 @@ fun main() {
     addNodeEnd(nodeA, 12)
     addNodeEnd(nodeA, 18)
 
-    printNode(nodeA)
+    printListNode(nodeA)
 
     val nodeB = ListNode(2)
     addNodeEnd(nodeB, 4)
@@ -62,10 +62,10 @@ fun main() {
     addNodeEnd(nodeB, 8)
     addNodeEnd(nodeB, 10)
 
-    printNode(nodeB)
+    printListNode(nodeB)
 
     val newNode = mergeListNode(nodeA, nodeB)
-    printNode(newNode)
-    printNode(nodeA)
-    printNode(nodeB)
+    printListNode(newNode)
+    printListNode(nodeA)
+    printListNode(nodeB)
 }

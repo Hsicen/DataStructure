@@ -97,7 +97,7 @@ class LRUCache(private val size: Int = 10) {
     }
 
     fun printData() {
-        printNode(cache)
+        printListNode(cache)
     }
 }
 

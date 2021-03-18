@@ -48,11 +48,11 @@ fun main() {
     head = addNodeEnd(head, 4)
     head = addNodeEnd(head, 5)
 
-    printNode(head)
+    printListNode(head)
     val newHead = reverseNode(head)
-    printNode(newHead)
+    printListNode(newHead)
 
-    /*printNode(head)
+    /*printListNode(head)
     val newHead1 = reverseNodeG(head)
-    printNode(newHead1)*/
+    printListNode(newHead1)*/
 }

@@ -65,8 +65,8 @@ fun main() {
     addNodeEnd(head, 6)
     addNodeEnd(head, 7)
 
-    printNode(head)
+    printListNode(head)
     deleteNthFromEnd(head, 1)
-    printNode(head)
+    printListNode(head)
 }
 

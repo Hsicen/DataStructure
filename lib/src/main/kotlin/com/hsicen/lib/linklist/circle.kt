@@ -52,7 +52,7 @@ fun main() {
     nodeA = addNodeEnd(nodeA, 4)
     nodeA = addNodeEnd(nodeA, 5)
 
-    printNode(nodeA)
+    printListNode(nodeA)
 
     var nodeB = ListNode(1)
     nodeB = addNodeHead(nodeB, 2)
@@ -63,9 +63,9 @@ fun main() {
     nodeB = same
 
     nodeB = addNodeHead(nodeB, 5)
-    printNode(nodeB)
+    printListNode(nodeB)
 
     val sameNode = twoNodeWithSame(nodeA, nodeB)
-    printNode(sameNode)
+    printListNode(sameNode)
 }
 
