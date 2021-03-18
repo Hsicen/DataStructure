@@ -8,7 +8,7 @@ package com.hsicen.lib.linklist
  */
 
 /**
- * 链表头地址已变  需要将老头地址指向新头地址
+ * 链表头地址已变  需要将旧头地址指向新头地址
  */
 fun addNodeHead(listNode: ListNode?, data: Int): ListNode {
     val head = ListNode(data)
@@ -34,14 +34,19 @@ fun addNodeEnd(listNode: ListNode?, data: Int): ListNode {
     return listNode
 }
 
+/**
+ * 链表头地址已变  需要将旧头地址指向新头地址
+ */
 fun addNodeHead(listNode: ListNode?, node: ListNode): ListNode {
     if (null == listNode) return node
 
-    val newHead = node
-    addNodeEnd(newHead, listNode)
-    return newHead
+    addNodeEnd(node, listNode)
+    return node
 }
 
+/**
+ * 填表头地址没有改变
+ */
 fun addNodeEnd(listNode: ListNode?, node: ListNode): ListNode {
     if (null == listNode) return node
 
@@ -62,8 +67,14 @@ fun main() {
     headA = addNodeHead(headA, 4)
     printListNode(headA)
 
-    addNodeEnd(headA, 5)
-    addNodeEnd(headA, 6)
-    addNodeEnd(headA, 7)
+    var headB = ListNode(5)
+    headB = addNodeHead(headB, 6)
+    headB = addNodeHead(headB, 7)
+    headB = addNodeHead(headB, 8)
+    printListNode(headB)
+
+    val nodeC = addNodeHead(headA, headB)
     printListNode(headA)
+    printListNode(headB)
+    printListNode(nodeC)
 }
