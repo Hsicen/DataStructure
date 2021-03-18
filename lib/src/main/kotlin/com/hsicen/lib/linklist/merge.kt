@@ -16,7 +16,7 @@ fun mergeListNode(nodeA: ListNode?, nodeB: ListNode?): ListNode? {
     var headA = nodeA
     var headB = nodeB
 
-    var newHead = if (headA.value < headB.value) {
+    val newHead = if (headA.value < headB.value) {
         headA = headA.next
         ListNode(nodeA.value)
     } else {

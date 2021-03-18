@@ -6,4 +6,4 @@ package com.hsicen.lib.linklist
  * 作用：
  * 描述：单链表结点
  */
-class ListNode(val value: Int, var next: ListNode? = null)
+data class ListNode(val value: Int, var next: ListNode? = null)

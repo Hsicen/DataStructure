@@ -50,26 +50,6 @@ fun addNodeEnd(listNode: ListNode?, node: ListNode): ListNode {
     return listNode
 }
 
-fun deleteNode(listNode: ListNode?, data: Int): ListNode? {
-    if (listNode?.value == data) {
-        return listNode.next
-    }
-
-    var pre = listNode
-    var head = listNode?.next
-    while (null != head?.next) {
-        if (data == head.value) {
-            pre?.next = head.next
-            return listNode
-        }
-
-        pre = head
-        head = head.next
-    }
-
-    return listNode
-}
-
 fun printNode(listNode: ListNode?) {
     if (null == listNode) return
 
