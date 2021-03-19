@@ -37,21 +37,17 @@ fun deleteNode(listNode: ListNode?, data: Int): ListNode? {
  * 删除链表的头结点时，链表头结点位置会改变
  */
 fun deleteNthFromEnd(listNode: ListNode?, index: Int): ListNode? {
-    if (null == listNode) return listNode
+    //利用头结点哨兵简化代码逻辑
+    val newHead = ListNode(-1, listNode)
 
     //快指针先移动 index 个结点
-    var fast: ListNode? = listNode
+    var fast: ListNode? = newHead
     repeat(index) {
         fast = fast?.next
     }
 
-    //如果 fast 移动到了末尾，则删除第一个结点
-    if (null == fast) {
-        return listNode.next
-    }
-
     //同时移动 fast,slow
-    var slow: ListNode? = listNode
+    var slow: ListNode? = newHead
     while (null != fast?.next) {
         fast = fast?.next
         slow = slow?.next
@@ -60,7 +56,7 @@ fun deleteNthFromEnd(listNode: ListNode?, index: Int): ListNode? {
     //删除 slow 的 next
     slow?.next = slow?.next?.next
 
-    return listNode
+    return newHead.next
 }
 
 fun main() {
@@ -71,12 +67,9 @@ fun main() {
     addNodeEnd(head, 5)
     addNodeEnd(head, 6)
     addNodeEnd(head, 7)
-    addNodeEnd(head, 3)
-    addNodeEnd(head, 5)
-    addNodeEnd(head, 1)
 
     printListNode(head)
-    head = deleteNode(head, 3)
+    head = deleteNthFromEnd(head, 1)
     printListNode(head)
 }
 
