@@ -7,25 +7,29 @@ package com.hsicen.lib.linklist
  * 描述：单链表常见的删除操作
  */
 
-//删除链表指定值结点
-fun deleteNode(listNode: ListNode?, data: Int): ListNode? {
-    if (listNode?.value == data) {
-        return listNode.next
-    }
 
-    var pre = listNode
-    var head = listNode?.next
-    while (null != head?.next) {
-        if (data == head.value) {
-            pre?.next = head.next
-            return listNode
+/**
+ * 删除链表指定值结点
+ * 删除链表的头结点时，链表头结点位置会改变
+ */
+fun deleteNode(listNode: ListNode?, data: Int): ListNode? {
+    //利用头结点哨兵简化代码逻辑
+    val newHead = ListNode(-1, listNode)
+
+    var pre = newHead
+    var cur = newHead.next
+
+    while (null != cur) {
+        if (data == cur.value) {
+            pre.next = cur.next
+        } else {
+            pre = cur
         }
 
-        pre = head
-        head = head.next
+        cur = cur.next
     }
 
-    return listNode
+    return newHead.next
 }
 
 /**
@@ -67,9 +71,12 @@ fun main() {
     addNodeEnd(head, 5)
     addNodeEnd(head, 6)
     addNodeEnd(head, 7)
+    addNodeEnd(head, 3)
+    addNodeEnd(head, 5)
+    addNodeEnd(head, 1)
 
     printListNode(head)
-    head = deleteNthFromEnd(head, 7)
+    head = deleteNode(head, 3)
     printListNode(head)
 }
 
