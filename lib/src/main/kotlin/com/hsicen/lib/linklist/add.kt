@@ -45,7 +45,7 @@ fun addNodeHead(listNode: ListNode?, node: ListNode): ListNode {
 }
 
 /**
- * 填表头地址没有改变
+ * 链表头地址没有改变
  */
 fun addNodeEnd(listNode: ListNode?, node: ListNode): ListNode {
     if (null == listNode) return node
