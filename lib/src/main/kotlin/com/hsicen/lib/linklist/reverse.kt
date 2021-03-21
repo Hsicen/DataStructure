@@ -7,36 +7,21 @@ package com.hsicen.lib.linklist
  * 描述：单链表反转相关操作
  */
 
-//反转单链表(不带头结点)
+//反转单链表
 fun reverseNode(listNode: ListNode?): ListNode? {
-    var head = listNode
-    var newHead: ListNode? = null
+    //利用头结点
+    val newHead = ListNode(-1, listNode)
 
-    while (null != head) {
-        val next = head.next
-        head.next = newHead
-        newHead = head
-        head = next
-    }
-
-    return newHead
-}
-
-
-//反转单链表(带头结点)
-fun reverseNodeG(listNode: ListNode): ListNode {
-    val newHead: ListNode = listNode
-    var head: ListNode? = listNode.next
-
+    var cur = newHead.next
     newHead.next = null
-    while (head != null) {
-        val next = head.next
-        head.next = newHead.next
-        newHead.next = head
-        head = next
+    while (null != cur) {
+        val next = cur.next
+        cur.next = newHead.next
+        newHead.next = cur
+        cur = next
     }
 
-    return newHead
+    return newHead.next
 }
 
 fun main() {
