@@ -18,18 +18,18 @@ fun addNodeHead(listNode: ListNode?, data: Int): ListNode {
 }
 
 /**
- * 链表头地址没变
+ * 链表头地址有可能改变
  */
 fun addNodeEnd(listNode: ListNode?, data: Int): ListNode {
     val end = ListNode(data)
     if (null == listNode) return end
 
-    var head = listNode
-    while (null != head?.next) {
-        head = head.next
+    var cur = listNode
+    while (null != cur?.next) {
+        cur = cur.next
     }
 
-    head?.next = end
+    cur?.next = end
 
     return listNode
 }
@@ -45,7 +45,7 @@ fun addNodeHead(listNode: ListNode?, node: ListNode): ListNode {
 }
 
 /**
- * 链表头地址没有改变
+ * 链表头地址有可能改变
  */
 fun addNodeEnd(listNode: ListNode?, node: ListNode): ListNode {
     if (null == listNode) return node
