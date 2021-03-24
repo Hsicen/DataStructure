@@ -75,8 +75,9 @@ fun main() {
     arrayStack.push(4)
     arrayStack.push(5)
     arrayStack.push(6)
-    arrayStack.pop()
-    arrayStack.pop()
+    println(arrayStack.pop())
+    println(arrayStack.peek())
+    println(arrayStack.peek())
 
     arrayStack.print()
 }
