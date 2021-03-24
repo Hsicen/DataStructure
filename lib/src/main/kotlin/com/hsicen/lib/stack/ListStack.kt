@@ -18,7 +18,7 @@ class ListStack {
     }
 
     fun pop(): Int {
-        if (null == head.next) return -1
+        if (empty()) return -1
 
         val next = head.next
         head.next = next?.next
