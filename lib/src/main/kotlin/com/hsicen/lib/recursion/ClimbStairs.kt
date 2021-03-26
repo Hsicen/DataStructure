@@ -39,9 +39,11 @@ fun climbStairs2(stair: Int): Int {
 }
 
 fun main() {
+    println("${climbStairs(1)} -> ${climbStairs2(1)}")
+    println("${climbStairs(2)} -> ${climbStairs2(2)}")
     println("${climbStairs(3)} -> ${climbStairs2(3)}")
+    println("${climbStairs(4)} -> ${climbStairs2(4)}")
     println("${climbStairs(5)} -> ${climbStairs2(5)}")
+    println("${climbStairs(6)} -> ${climbStairs2(6)}")
     println("${climbStairs(7)} -> ${climbStairs2(7)}")
-    println("${climbStairs(9)} -> ${climbStairs2(9)}")
-    println("${climbStairs(21)} -> ${climbStairs2(21)}")
 }
