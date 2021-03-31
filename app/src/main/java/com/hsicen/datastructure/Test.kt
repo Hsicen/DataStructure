@@ -33,6 +33,23 @@ open class TypeToken<T> {
 
 inline fun <reified T> getType() = T::class.java
 
+
+inline fun <T, R> Iterable<T>.mapH(transform: (T) -> R): ArrayList<R> {
+    return mapTo(ArrayList(10), transform)
+}
+
+inline fun <T, R, C : MutableCollection<in R>> Iterable<T>.mapTo(
+    destination: C,
+    transform: (T) -> R
+): C {
+
+    for (item in this) {
+        destination.add(transform(item))
+    }
+
+    return destination
+}
+
 fun main() {
     val type = object : TypeToken<Map<Int, String>>() {}.type
     println(type)
@@ -44,5 +61,14 @@ fun main() {
     2.sum(1)
     2.sum(1)
 
+    val arrayList = ArrayList<Int>()
+    arrayList.add(1)
+    arrayList.add(2)
+    arrayList.add(3)
+    arrayList.add(4)
+    arrayList.add(5)
+    arrayList.add(6)
+    val groupBy = arrayList.groupBy { it % 2 == 0 }
+    println(groupBy.toString())
     println(ArrayList<String>().javaClass.name)
 }
