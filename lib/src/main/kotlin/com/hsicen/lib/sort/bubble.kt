@@ -11,6 +11,11 @@ package com.hsicen.lib.sort
  *
  * 原地排序：是
  * 稳定排序：是
+ *
+ * 最好时间复杂度：O(n)
+ * 最差时间复杂度：O(n^2)
+ * 平均时间复杂度：O(n^2)
+ *
  * 优化：在一次排序过程中，如果没有数据交换，则认为数据已经有序，可以退出排序
  */
 
@@ -19,6 +24,8 @@ fun bubbleSort(items: IntArray) {
     var exchange: Boolean
 
     for (i in items.indices) {
+        println("外层循环：${i + 1}")
+
         exchange = false
         for (j in 0 until items.size - i - 1) {
             if (items[j] > items[j + 1]) {
@@ -26,10 +33,10 @@ fun bubbleSort(items: IntArray) {
                 items[j] = items[j + 1]
                 items[j + 1] = tmp
                 exchange = true
+                println("内层交换：${items[j]}->${items[j + 1]} 结果：${items.contentToString()}")
             }
         }
 
-        println("第${i + 1} 次排序：${items.contentToString()}")
         if (!exchange) return
     }
 }
@@ -37,7 +44,7 @@ fun bubbleSort(items: IntArray) {
 
 fun main() {
     val intArray = intArrayOf(3, 5, 7, 3, 2, 8, 9, 0, 1, 10)
-    println(intArray.contentToString())
+    println("原始数组：${intArray.contentToString()}")
     bubbleSort(intArray)
-    println(intArray.contentToString())
+    println("排序数组：${intArray.contentToString()}")
 }
