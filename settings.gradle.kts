@@ -7,5 +7,5 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "DataStructure"
-include ':app'
-include ':lib'
+include(":app")
+include(":lib")
