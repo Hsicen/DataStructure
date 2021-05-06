@@ -4,7 +4,15 @@ package com.hsicen.lib.sort
  * 作者：hsicen  5/6/21 09:14
  * 邮箱：codinghuang@163.com
  * 作用：
- * 描述：快速排序
+ * 描述：快速排序  分治思想
+ *
+ * 稳定排序：否
+ * 原地排序：是
+ *
+ * 空间复杂度：O(1)
+ * 最好时间复杂度：O(n*logn)
+ * 最差时间复杂度：O(n*n)
+ * 平均时间复杂度：O(n*logn)
  */
 
 fun quickSort(items: IntArray) {
@@ -15,6 +23,7 @@ fun quickSort(items: IntArray) {
 private fun sortRecursion(items: IntArray, start: Int, end: Int) {
     if (start >= end) return
 
+    //拆分时排序
     val pivot = partition(items, start, end)
     sortRecursion(items, start, pivot - 1)
     sortRecursion(items, pivot + 1, end)
