@@ -38,13 +38,13 @@ private fun partition(items: IntArray, start: Int, end: Int): Int {
     //将分区点放在分界处
     items[end] = items[index]
     items[index] = pivot
+    println("分区点$pivot：${items.contentToString()}")
 
     return index
 }
 
 fun main() {
     val items = intArrayOf(4, 3, 8, 9, 6, 7, 5, 2, 0, 1)
-    println(items.contentToString())
+    println("原数据：${items.contentToString()}")
     quickSort(items)
-    println(items.contentToString())
 }
