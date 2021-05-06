@@ -73,5 +73,4 @@ fun main() {
     val items = intArrayOf(4, 3, 8, 9, 6, 7, 5, 2, 0, 1)
     println(items.contentToString())
     mergeSort(items)
-    println(items.contentToString())
 }
