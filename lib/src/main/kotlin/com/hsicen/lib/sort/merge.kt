@@ -18,7 +18,7 @@ fun mergeSort(items: IntArray) {
 }
 
 //递归分区
-fun sortRecursion(items: IntArray, start: Int, end: Int) {
+private fun sortRecursion(items: IntArray, start: Int, end: Int) {
     //递归终止条件
     if (start >= end) return
 
@@ -35,7 +35,7 @@ fun sortRecursion(items: IntArray, start: Int, end: Int) {
  * 两个有序数组的合并(需要额外空间)
  * 利用哨兵放在数组末尾简化合并操作
  */
-fun sortMerge(items: IntArray, start: Int, mid: Int, end: Int) {
+private fun sortMerge(items: IntArray, start: Int, mid: Int, end: Int) {
     println("排序区间：$start $mid $end")
 
     val leftArray = IntArray(mid - start + 2) { Int.MAX_VALUE }
