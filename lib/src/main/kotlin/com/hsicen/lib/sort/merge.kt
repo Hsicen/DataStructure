@@ -4,13 +4,18 @@ package com.hsicen.lib.sort
  * 作者：hsicen  4/26/21 9:19 AM
  * 邮箱：codinghuang@163.com
  * 作用：
- * 描述：并归排序 递归
+ * 描述：并归排序 分治思想
  *
  * 稳定排序：是
  * 原地排序：否
  *
- * 时间复杂度：O(nlog2(n))
+ * 时间复杂度：O(n*logn)
  * 空间复杂度：O(n)
+ *
+ * 递推公式：
+ *  mergeSort(p..r) = merge(mergeSort(p...q),mergeSort(q+1...r))
+ * 终止条件：
+ *  p>=r
  */
 
 fun mergeSort(items: IntArray) {
@@ -27,7 +32,7 @@ private fun sortRecursion(items: IntArray, start: Int, end: Int) {
     sortRecursion(items, start, mid)
     sortRecursion(items, mid + 1, end)
 
-    //递归合并
+    //递归合并  合并时排序
     sortMerge(items, start, mid, end)
 }
 

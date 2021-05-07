@@ -13,6 +13,11 @@ package com.hsicen.lib.sort
  * 最好时间复杂度：O(n*logn)
  * 最差时间复杂度：O(n*n)
  * 平均时间复杂度：O(n*logn)
+ *
+ * 递推公式:
+ *  quick_sort(p…r) = quick_sort(p…q-1) + quick_sort(q+1… r)
+ * 终止条件：
+ *  p >= r
  */
 
 fun quickSort(items: IntArray) {
