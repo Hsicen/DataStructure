@@ -57,8 +57,34 @@ private fun partition(items: IntArray, start: Int, end: Int): Int {
     return index
 }
 
+
+/**=========应用============**/
+/**
+ * 查找无序数组中第n大的元素
+ * 要求：时间复杂度为O(n)
+ *
+ * 利用快排思想，进行分区查找
+ */
+fun findNthLarge(items: IntArray, n: Int): Int {
+
+    fun partitionRecursion(items: IntArray, start: Int, end: Int): Int {
+        if (start >= end) return items[start]
+
+        val pivot = partition(items, start, end)
+        return when {
+            pivot + 1 == n -> items[pivot]
+            pivot + 1 < n -> partitionRecursion(items, pivot + 1, end)
+            else -> partitionRecursion(items, start, pivot - 1)
+        }
+    }
+
+    return partitionRecursion(items, 0, items.size - 1)
+}
+
 fun main() {
     val items = intArrayOf(4, 3, 8, 9, 6, 7, 5, 2, 0, 1)
     println("原数据：${items.contentToString()}")
-    quickSort(items)
+    //quickSort(items)
+
+    println("第1大数据：${findNthLarge(items, items.size - (1 - 1))}")
 }
