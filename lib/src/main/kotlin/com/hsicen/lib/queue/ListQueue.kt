@@ -12,45 +12,45 @@ import com.hsicen.lib.linklist.printListNode
  *  不存在队列满的情况
  */
 class ListQueue {
-    private val head = ListNode(-1)
+  private val head = ListNode(-1)
 
-    fun enQueue(item: Int) {
-        head.next = addNodeEnd(head.next, item)
-    }
+  fun enQueue(item: Int) {
+    head.next = addNodeEnd(head.next, item)
+  }
 
-    fun deQueue(): Int {
-        if (empty()) return -1
+  fun deQueue(): Int {
+    if (empty()) return -1
 
-        val next = head.next
-        head.next = next?.next
-        return next?.value ?: -1
-    }
+    val next = head.next
+    head.next = next?.next
+    return next?.value ?: -1
+  }
 
-    fun peek(): Int {
-        return head.next?.value ?: -1
-    }
+  fun peek(): Int {
+    return head.next?.value ?: -1
+  }
 
-    fun empty(): Boolean {
-        return null == head.next
-    }
+  fun empty(): Boolean {
+    return null == head.next
+  }
 
-    fun print() {
-        printListNode(head.next)
-    }
+  fun print() {
+    printListNode(head.next)
+  }
 }
 
 fun main() {
-    val listQueue = ListQueue()
-    listQueue.enQueue(1)
-    listQueue.enQueue(2)
-    listQueue.enQueue(3)
-    listQueue.enQueue(4)
+  val listQueue = ListQueue()
+  listQueue.enQueue(1)
+  listQueue.enQueue(2)
+  listQueue.enQueue(3)
+  listQueue.enQueue(4)
 
-    listQueue.print()
-    listQueue.deQueue()
-    listQueue.deQueue()
-    listQueue.deQueue()
-    listQueue.enQueue(8)
-    listQueue.deQueue()
-    listQueue.print()
+  listQueue.print()
+  listQueue.deQueue()
+  listQueue.deQueue()
+  listQueue.deQueue()
+  listQueue.enQueue(8)
+  listQueue.deQueue()
+  listQueue.print()
 }
