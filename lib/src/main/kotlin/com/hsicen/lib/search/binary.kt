@@ -27,22 +27,34 @@ import kotlin.math.abs
  */
 
 fun main() {
-  val items = intArrayOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20)
-  println("10的下标：${bSearch1(items, 10)}")
-  println("10的下标：${bSearch2(items, 10)}")
-  println("15的下标：${bSearch1(items, 15)}")
-  println("15的下标：${bSearch2(items, 15)}")
+    val items = intArrayOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20)
+    println("10的下标：${bSearch1(items, 10)}")
+    println("10的下标：${bSearch2(items, 10)}")
+    println("15的下标：${bSearch1(items, 15)}")
+    println("15的下标：${bSearch2(items, 15)}")
 
-  println("1的平方根：${mySqrt2(1f, 1)}")
-  println("2的平方根：${mySqrt2(2f, 2)}")
-  println("3的平方根：${mySqrt2(3f, 3)}")
-  println("8的平方根：${mySqrt2(8f, 4)}")
-  println("9的平方根：${mySqrt2(9f, 5)}")
+    println("1的平方根：${mySqrt2(1f, 1)}")
+    println("2的平方根：${mySqrt2(2f, 2)}")
+    println("3的平方根：${mySqrt2(3f, 3)}")
+    println("8的平方根：${mySqrt2(8f, 4)}")
+    println("9的平方根：${mySqrt2(9f, 5)}")
 
-  val items2 = intArrayOf(1, 2, 3, 4, 5, 6, 8, 8, 8, 8, 8, 11, 18)
-  println(findFirstEquals(items2, 3))
-  println(findFirstEquals(items2, 8))
-  println(findFirstEquals(items2, 22))
+    val items2 = intArrayOf(1, 2, 3, 4, 5, 6, 8, 8, 8, 8, 8, 11, 18)
+    /*println(findFirstEquals(items2, 3))
+    println(findFirstEquals(items2, 8))
+    println(findFirstEquals(items2, 22))*/
+
+    /*println(findLastEquals(items2, 3))
+    println(findLastEquals(items2, 8))
+    println(findLastEquals(items2, 22))*/
+
+    /*println(findFirstLarge(items2, 3))
+    println(findFirstLarge(items2, 8))
+    println(findFirstLarge(items2, 22))*/
+
+    println(findLastSmal(items2, 3))
+    println(findLastSmal(items2, 8))
+    println(findLastSmal(items2, 22))
 }
 
 /**
@@ -52,24 +64,21 @@ fun main() {
  * @return 查找到的位置下标
  */
 private fun bSearch1(items: IntArray, item: Int): Int {
-  if (items.isEmpty()) return -1
+    if (items.isEmpty()) return -1
 
-  var low = 0
-  var high = items.size - 1
+    var low = 0
+    var high = items.size - 1
 
-  while (low <= high) {
-    //val mid = (low + high) / 2 容易数据溢出
-    //val mid = low + (high - low) / 2 优化
-    //val mid = low + (high - low) shr 1 位运算右移
-    val mid = low + ((high - low) shr 1)
-    when {
-      items[mid] == item -> return mid
-      items[mid] > item -> high = mid - 1
-      items[mid] < item -> low = mid + 1
+    while (low <= high) {
+        val mid = low + ((high - low) shr 1)
+        when {
+            items[mid] == item -> return mid
+            items[mid] > item -> high = mid - 1
+            items[mid] < item -> low = mid + 1
+        }
     }
-  }
 
-  return -1
+    return -1
 }
 
 /**
@@ -79,18 +88,18 @@ private fun bSearch1(items: IntArray, item: Int): Int {
  * @return 查找到的位置下标
  */
 private fun bSearch2(items: IntArray, item: Int): Int {
-  fun search(items: IntArray, item: Int, low: Int, high: Int): Int {
-    if (low > high) return -1
+    fun search(items: IntArray, item: Int, low: Int, high: Int): Int {
+        if (low > high) return -1
 
-    val mid = low + ((high - low) shr 1)
-    return when {
-      items[mid] == item -> mid
-      items[mid] < item -> search(items, item, mid + 1, high)
-      else -> search(items, item, low, mid - 1)
+        val mid = low + ((high - low) shr 1)
+        return when {
+            items[mid] == item -> mid
+            items[mid] < item -> search(items, item, mid + 1, high)
+            else -> search(items, item, low, mid - 1)
+        }
     }
-  }
 
-  return search(items, item, 0, items.size - 1)
+    return search(items, item, 0, items.size - 1)
 }
 
 
@@ -98,24 +107,24 @@ private fun bSearch2(items: IntArray, item: Int): Int {
  * 求一个数的平方根(保留整数)
  */
 private fun mySqrt(item: Int): Int {
-  if (item <= 0) return -1
-  if (1 == item) return item
+    if (item <= 0) return -1
+    if (1 == item) return item
 
-  var low = 0
-  var high = item
-  var result = -1
-  while (low <= high) {
-    val mid = low + ((high - low) / 2)
+    var low = 0
+    var high = item
+    var result = -1
+    while (low <= high) {
+        val mid = low + ((high - low) / 2)
 
-    if (mid <= item / mid) {
-      result = mid
-      low = mid + 1
-    } else {
-      high = mid - 1
+        if (mid <= item / mid) {
+            result = mid
+            low = mid + 1
+        } else {
+            high = mid - 1
+        }
     }
-  }
 
-  return result
+    return result
 }
 
 /**
@@ -123,19 +132,19 @@ private fun mySqrt(item: Int): Int {
  * 牛顿迭代法
  */
 private fun mySqrt2(x: Float, count: Int): Float {
-  if (x <= 0) return 0f
-  if (x == 1f) return 1f
+    if (x <= 0) return 0f
+    if (x == 1f) return 1f
 
-  //精度
-  val e = 1 shr (if (count < 0) 0 else count)
-  var ret = x
-  var t = (ret + x / ret) / 2
-  while (abs(ret - t) > e) {
-    ret = t
-    t = (ret + x / ret) / 2
-  }
+    //精度
+    val e = 1 shr (if (count < 0) 0 else count)
+    var ret = x
+    var t = (ret + x / ret) / 2
+    while (abs(ret - t) > e) {
+        ret = t
+        t = (ret + x / ret) / 2
+    }
 
-  return ret
+    return ret
 }
 
 /**
@@ -145,26 +154,26 @@ private fun mySqrt2(x: Float, count: Int): Float {
  * @return 返回数组下标
  */
 private fun findFirstEquals(items: IntArray, item: Int): Int {
-  if (items.isEmpty()) return -1
-  var low = 0
-  var high = items.size - 1
+    if (items.isEmpty()) return -1
+    var low = 0
+    var high = items.size - 1
 
-  while (low <= high) {
-    val mid = low + ((high - low) shr 1)
-    when {
-      items[mid] > item -> high = mid - 1
-      items[mid] < item -> low = mid + 1
-      else -> {
-        if (0 == mid || items[mid - 1] != item) {
-          return mid
-        } else {
-          high = mid - 1
+    while (low <= high) {
+        val mid = low + ((high - low) shr 1)
+        when {
+            items[mid] > item -> high = mid - 1
+            items[mid] < item -> low = mid + 1
+            else -> {
+                if (0 == mid || items[mid - 1] != item) {
+                    return mid
+                } else {
+                    high = mid - 1
+                }
+            }
         }
-      }
     }
-  }
 
-  return -1
+    return -1
 }
 
 /**
@@ -174,7 +183,78 @@ private fun findFirstEquals(items: IntArray, item: Int): Int {
  * @return 返回数组下标
  */
 private fun findLastEquals(items: IntArray, item: Int): Int {
+    if (items.isEmpty()) return -1
+    var low = 0
+    var high = items.size - 1
 
+    while (low <= high) {
+        val mid = low + ((high - low) shr 1)
+        when {
+            items[mid] > item -> high = mid - 1
+            items[mid] < item -> low = mid + 1
+            else -> {
+                if (mid == items.size - 1 || items[mid + 1] != item) {
+                    return mid
+                } else {
+                    low = mid + 1
+                }
+            }
+        }
+    }
 
-  return -1
+    return -1
+}
+
+/**
+ * 查找第一个大于等于给定值的元素
+ * @param items 数据
+ * @param item 被查找的元素
+ * @return 返回数组下标
+ */
+private fun findFirstLarge(items: IntArray, item: Int): Int {
+    if (items.isEmpty()) return -1
+    var low = 0
+    var high = items.size - 1
+
+    while (low <= high) {
+        val mid = low + ((high - low) shr 1)
+        if (items[mid] >= item) {
+            if (0 == mid || items[mid - 1] < item) {
+                return mid
+            } else {
+                high = mid - 1
+            }
+        } else {
+            low = mid + 1
+        }
+    }
+
+    return -1
+}
+
+/**
+ * 查找最后一个小于等于给定值的元素
+ * @param items 数据
+ * @param item 被查找的元素
+ * @return 返回数组下标
+ */
+private fun findLastSmal(items: IntArray, item: Int): Int {
+    if (items.isEmpty()) return -1
+    var low = 0
+    var high = items.size - 1
+
+    while (low <= high) {
+        val mid = low + ((high - low) shr 1)
+        if (items[mid] <= item) {
+            if (mid == items.size - 1 || items[mid + 1] > item) {
+                return mid
+            } else {
+                low = mid + 1
+            }
+        } else {
+            high = mid - 1
+        }
+    }
+
+    return -1
 }
