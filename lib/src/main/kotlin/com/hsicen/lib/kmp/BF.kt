@@ -12,7 +12,7 @@ package com.hsicen.lib.kmp
  *  我们会对比 n-m+1 个字符串, 每个字符串的长度为 m, 最坏的情况下时间复杂度为O(m*n)
  */
 
-fun bf(source: String, key: String): Boolean {
+private fun bf(source: String, key: String): Boolean {
     if (source == key) return true
 
     val n = source.length
