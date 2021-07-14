@@ -1,5 +1,7 @@
 package com.hsicen.lib.custom
 
+import java.util.*
+
 /**
  * 作者：hsicen  7/13/21 10:03
  * 邮箱：codinghuang@163.com
@@ -61,8 +63,9 @@ private fun printQueens() {
     println()
 }
 
-// 存储背包中物品总重量的最大值
+// [maxW]存储背包中物品总重量的最大值 [mem]记录计算过的值
 private var maxW = Int.MAX_VALUE
+private val mem = LinkedList<BooleanArray>()
 
 /**
  * backpack(0,0,a,10,100)
@@ -78,6 +81,8 @@ private fun backpack(i: Int, cw: Int, items: IntArray, n: Int, w: Int) {
         return
     }
 
+    if (mem[i][cw]) return
+    mem[i][cw] = true
     backpack(i + 1, cw, items, n, w)
     if (cw + items[i] <= w) {
         backpack(i + 1, cw + items[i], items, n, w)
