@@ -1,5 +1,7 @@
 package com.hsicen.lib.custom
 
+import kotlin.math.min
+
 /**
  * 作者：hsicen  7/13/21 11:29
  * 邮箱：codinghuang@163.com
@@ -77,6 +79,67 @@ private fun knapsack2(items: IntArray, n: Int, w: Int): Int {
     return 0
 }
 
+//矩阵最短路径问题 回溯算法
+private var minDist = Int.MAX_VALUE
+private fun minDistBT(i: Int, j: Int, dist: Int, w: Array<IntArray>, n: Int) {
+    if (i == n && j == n) {
+        if (dist < minDist) minDist = dist
+        return
+    }
+
+    //往下走 更新i
+    if (i < n) minDistBT(i + 1, j, dist + w[i][j], w, n)
+    //往右走 更新j
+    if (j < n) minDistBT(i, j + 1, dist + w[i][j], w, n)
+}
+
+//矩阵最短路径问题 动态规划 状态转移表
+private fun minDistDP(matrix: Array<IntArray>, n: Int): Int {
+    val states = Array(n) { IntArray(n) }
+    var sum = 0
+
+    //初始化第一列
+    repeat(n - 1) { j ->
+        sum += matrix[0][j]
+        states[0][j] = sum
+    }
+
+    //初始化第一行
+    sum = 0
+    repeat(n - 1) { i ->
+        sum += matrix[i][0]
+        states[i][0]
+    }
+
+    //构建状态转移表
+    for (i in 1 until n) {
+        for (j in 1 until n) {
+            states[i][j] = matrix[i][j] + min(states[i][j - 1], states[i - 1][j])
+        }
+    }
+
+    return states[n - 1][n - 1]
+}
+
+//矩阵最短路径问题 动态规划 状态转移方程
+private val matrix = Array(4) { IntArray(4) }
+private val mem = Array(4) { IntArray(4) }
+private val n = 4
+private fun minDist(i: Int, j: Int): Int {
+    if (0 == i && 0 == j) return matrix[0][0]
+    if (mem[i][j] > 0) return mem[i][j]
+
+    var minLeft = Int.MAX_VALUE
+    if (j - 1 >= 0) minLeft = minDist(i, j - 1)
+
+    var minUp = Int.MAX_VALUE
+    if (i - 1 >= 0) minUp = minDist(i - 1, j)
+
+    val currMinDist = matrix[i][j] + min(minLeft, minUp)
+    mem[i][j] = currMinDist
+
+    return currMinDist
+}
 
 fun main() {
     val weight = intArrayOf(2, 2, 4, 6, 3)
