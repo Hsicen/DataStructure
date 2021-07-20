@@ -8,6 +8,11 @@ import kotlin.math.min
  * 作用：
  * 描述：动态规划
  * 动态规划比较适合用来求解最优问题，比如求最大值、最小值等等；它可以非常显著地降低时间复杂度，提高代码的执行效率
+ * 多阶段决策最优解模型，重复子问题，
+ *
+ * 字符串相似程度：编辑距离
+ *  莱文斯坦距离 ->
+ *  最长公共子串 ->
  */
 
 /**
@@ -124,7 +129,6 @@ private fun minDistDP(matrix: Array<IntArray>, n: Int): Int {
 //矩阵最短路径问题 动态规划 状态转移方程
 private val matrix = Array(4) { IntArray(4) }
 private val mem = Array(4) { IntArray(4) }
-private val n = 4
 private fun minDist(i: Int, j: Int): Int {
     if (0 == i && 0 == j) return matrix[0][0]
     if (mem[i][j] > 0) return mem[i][j]
