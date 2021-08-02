@@ -1,22 +1,22 @@
 buildscript {
-  repositories {
-    google()
-    mavenCentral()
-  }
+    repositories {
+        google()
+        mavenCentral()
+    }
 
-  dependencies {
-    classpath("com.android.tools.build:gradle:4.2.2")
-    classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.10")
-  }
+    dependencies {
+        classpath("com.android.tools.build:gradle:7.0.0")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.21")
+    }
 }
 
 allprojects {
-  repositories {
-    google()
-    mavenCentral()
-  }
+    repositories {
+        google()
+        mavenCentral()
+    }
 }
 
 tasks.register<Delete>("clean") {
-  delete(rootProject.buildDir)
+    delete(rootProject.buildDir)
 }
