@@ -34,4 +34,5 @@ fun main() {
 
     head = reverseNode(head)
     printListNode(head)
+    printListNode(head)
 }
