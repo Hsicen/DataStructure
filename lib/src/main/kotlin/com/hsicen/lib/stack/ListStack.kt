@@ -29,6 +29,10 @@ class ListStack {
         return head.next?.value ?: -1
     }
 
+    fun clear() {
+        head.next = null
+    }
+
     fun empty(): Boolean {
         return head.next == null
     }
