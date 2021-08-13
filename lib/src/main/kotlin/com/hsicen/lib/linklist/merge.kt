@@ -45,6 +45,23 @@ fun mergeListNode(nodeA: ListNode?, nodeB: ListNode?): ListNode? {
     return newHead
 }
 
+fun mergeTwoList(nodeA: ListNode?, nodeB: ListNode?): ListNode? {
+    if (null == nodeA || null == nodeB) return nodeA ?: nodeB
+
+    /*return if (nodeA.value < nodeB.value) {
+        nodeA.next = mergeTwoList(nodeA.next, nodeB)
+        nodeA
+    } else {
+        nodeB.next = mergeTwoList(nodeA, nodeB.next)
+        nodeB
+    }*/
+
+    val newHead = if (nodeA.value < nodeB.value) nodeA else nodeB
+    newHead.next = mergeTwoList(newHead.next, if (newHead == nodeA) nodeB else nodeA)
+    return newHead
+}
+
+
 fun main() {
     val nodeA = ListNode(1)
     addNodeEnd(nodeA, 3)
