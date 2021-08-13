@@ -1,0 +1,1 @@
+package com.hsicen.lib.searchimport kotlin.math.pow/** * 作者：hsicen  8/13/21 11:24 * 邮箱：codinghuang@163.com * 作用： * 描述：求一个数的幂 * Implement pow(x, n), which calculates x raised to the power n (xn). */fun myPow(x: Double, n: Int): Double {    return x.pow(n)}fun main() {    println(myPow(2.00000, -2147483648))}
