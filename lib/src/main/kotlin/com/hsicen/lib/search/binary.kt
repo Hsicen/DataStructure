@@ -1,7 +1,5 @@
 package com.hsicen.lib.search
 
-import kotlin.math.abs
-
 /**
  * 作者：hsicen  6/16/21 09:26
  * 邮箱：codinghuang@163.com
@@ -32,12 +30,6 @@ fun main() {
     println("10的下标：${bSearch2(items, 10)}")
     println("15的下标：${bSearch1(items, 15)}")
     println("15的下标：${bSearch2(items, 15)}")
-
-    println("1的平方根：${mySqrt2(1f, 1)}")
-    println("2的平方根：${mySqrt2(2f, 2)}")
-    println("3的平方根：${mySqrt2(3f, 3)}")
-    println("8的平方根：${mySqrt2(8f, 4)}")
-    println("9的平方根：${mySqrt2(9f, 5)}")
 
     val items2 = intArrayOf(1, 2, 3, 4, 5, 6, 8, 8, 8, 8, 8, 11, 18)
     /*println(findFirstEquals(items2, 3))
@@ -100,51 +92,6 @@ private fun bSearch2(items: IntArray, item: Int): Int {
     }
 
     return search(items, item, 0, items.size - 1)
-}
-
-
-/**
- * 求一个数的平方根(保留整数)
- */
-private fun mySqrt(item: Int): Int {
-    if (item <= 0) return -1
-    if (1 == item) return item
-
-    var low = 0
-    var high = item
-    var result = -1
-    while (low <= high) {
-        val mid = low + ((high - low) / 2)
-
-        if (mid <= item / mid) {
-            result = mid
-            low = mid + 1
-        } else {
-            high = mid - 1
-        }
-    }
-
-    return result
-}
-
-/**
- * 求一个数的平方根(保留整数)
- * 牛顿迭代法
- */
-private fun mySqrt2(x: Float, count: Int): Float {
-    if (x <= 0) return 0f
-    if (x == 1f) return 1f
-
-    //精度
-    val e = 1 shr (if (count < 0) 0 else count)
-    var ret = x
-    var t = (ret + x / ret) / 2
-    while (abs(ret - t) > e) {
-        ret = t
-        t = (ret + x / ret) / 2
-    }
-
-    return ret
 }
 
 /**
