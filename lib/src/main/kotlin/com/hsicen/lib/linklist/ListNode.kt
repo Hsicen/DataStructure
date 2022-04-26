@@ -7,3 +7,4 @@ package com.hsicen.lib.linklist
  * 描述：单链表结点
  */
 data class ListNode(val value: Int, var next: ListNode? = null)
+
