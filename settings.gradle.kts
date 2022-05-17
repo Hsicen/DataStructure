@@ -2,6 +2,7 @@ include(":design")
 include(":letcode")
 include(":javaguide")
 include(":thinkjava")
+include(":onjava")
 
 pluginManagement {
   repositories {
