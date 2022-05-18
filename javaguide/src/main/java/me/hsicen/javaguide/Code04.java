@@ -6,6 +6,10 @@ public class Code04 {
 
   public static void main(String[] args) {
 
+    range2();
+  }
+
+  private static void range3() {
     int i = 130;
     int j = 130;
 
