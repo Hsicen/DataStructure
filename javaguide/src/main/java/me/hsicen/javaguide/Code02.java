@@ -12,5 +12,8 @@ package me.hsicen.javaguide;
  */
 
 class Code02 {
+  public static void main(String[] args) {
+
+  }
 
 }

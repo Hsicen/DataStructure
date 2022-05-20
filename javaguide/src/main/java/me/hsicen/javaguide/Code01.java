@@ -25,5 +25,7 @@ package me.hsicen.javaguide;
  * 个人认为就跟java多了jvm进行分层、网络用7层4层划分一样，通过高级语言到汇编再到机器码的过程，可以降低编译器的编写难度、提升效率；而且汇编要进行调试、进行优化的话应该也要比机器码容易一点
  */
 class Code01 {
+  public static void main(String[] args) {
 
+  }
 }
