@@ -3,6 +3,7 @@ include(":letcode")
 include(":javaguide")
 include(":thinkjava")
 include(":onjava")
+include(":kotlinguide")
 
 pluginManagement {
   repositories {
