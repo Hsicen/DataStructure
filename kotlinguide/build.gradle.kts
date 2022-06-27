@@ -10,4 +10,5 @@ java {
 
 dependencies {
   testImplementation("org.jetbrains.kotlin:kotlin-test")
+  implementation(kotlin("reflect"))
 }
