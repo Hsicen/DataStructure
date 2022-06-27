@@ -11,4 +11,5 @@ java {
 dependencies {
   testImplementation("org.jetbrains.kotlin:kotlin-test")
   implementation(kotlin("reflect"))
+  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0")
 }
