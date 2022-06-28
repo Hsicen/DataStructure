@@ -12,4 +12,9 @@ dependencies {
   testImplementation("org.jetbrains.kotlin:kotlin-test")
   implementation(kotlin("reflect"))
   implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0")
+
+  // okhttp3
+  implementation("com.squareup.okhttp3:okhttp:4.3.1")
+  // gson
+  implementation("com.google.code.gson:gson:2.8.5")
 }
