@@ -3,7 +3,15 @@ package me.hsicen.kotlinguide
 import com.google.gson.Gson
 import com.google.gson.internal.`$Gson$Types`.getRawType
 import kotlinx.coroutines.async
+import kotlinx.coroutines.channels.awaitClose
+import kotlinx.coroutines.channels.onFailure
+import kotlinx.coroutines.channels.onSuccess
+import kotlinx.coroutines.channels.trySendBlocking
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.callbackFlow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.suspendCancellableCoroutine
 import okhttp3.Call
@@ -52,6 +60,12 @@ interface ApiServiceV3 {
     @Field("lang") lang: String,
     @Field("since") since: String
   ): RepoList
+
+  @GET("/repo")
+  fun reposFlow(
+    @Field("lang") lang: String,
+    @Field("since") since: String
+  ): Flow<RepoList>
 }
 
 object KtHttp {
@@ -86,12 +100,11 @@ object KtHttp {
         if (parameterAnnotation is Field) {
           val key = parameterAnnotation.value
           val value = args[i].toString()
-          if (!url.contains("?")) {
-            url += "?$key=$value"
+          url += if (!url.contains("?")) {
+            "?$key=$value"
           } else {
-            url += "&$key=$value"
+            "&$key=$value"
           }
-
         }
       }
     }
@@ -102,15 +115,30 @@ object KtHttp {
 
     val call = okHttpClient.newCall(request)
 
-    return if (isKtCallReturn(method)) {
-      val genericReturnType = getTypeArgument(method)
-      KtCall<T>(call, gson, genericReturnType)
-    } else {
-      val response = okHttpClient.newCall(request).execute()
 
-      val genericReturnType = method.genericReturnType
-      val json = response.body?.string()
-      gson.fromJson<Any?>(json, genericReturnType)
+    return when {
+      isKtCallReturn(method) -> {
+        val genericReturnType = getTypeArgument(method)
+        KtCall<T>(call, gson, genericReturnType)
+      }
+
+      isFlowReturn(method) -> {
+        flow<T> {
+          val type = getTypeArgument(method)
+          val response = okHttpClient.newCall(request).execute()
+          val json = response.body?.string()
+          val data = gson.fromJson<T>(json, type)
+          emit(data)
+        }
+      }
+
+      else -> {
+        val response = okHttpClient.newCall(request).execute()
+
+        val genericReturnType = method.genericReturnType
+        val json = response.body?.string()
+        gson.fromJson<Any?>(json, genericReturnType)
+      }
     }
   }
 
@@ -119,6 +147,9 @@ object KtHttp {
 
   private fun isKtCallReturn(method: Method) =
     getRawType(method.genericReturnType) == KtCall::class.java
+
+  private fun isFlowReturn(method: Method) =
+    getRawType(method.genericReturnType) == Flow::class.java
 }
 
 
@@ -166,6 +197,26 @@ suspend fun <T : Any> KtCall<T>.await(): T = suspendCancellableCoroutine { conti
   }
 }
 
+fun <T : Any> KtCall<T>.asFlow(): Flow<T> = callbackFlow {
+  val call = call(object : Callback<T> {
+    override fun onSuccess(data: T) {
+      // trySend(data) 直接发送数据，如果此时 channel 已满，直接失败
+      trySendBlocking(data) // 当 Channel 满的时候，会等待，直到有空间可以发送数据
+        // 关闭 channel
+        .onSuccess { close() }
+        .onFailure { close(it) }
+    }
+
+    override fun onFail(throwable: Throwable) {
+      close(throwable)
+    }
+  })
+
+  awaitClose { // channel 关闭时回调
+    call.cancel()
+  }
+}
+
 fun main() = runBlocking {
   val start = System.currentTimeMillis()
 
@@ -191,4 +242,23 @@ fun main() = runBlocking {
   } finally {
     println("Time total: ${System.currentTimeMillis() - start}")
   }
+}
+
+suspend fun testFlow() {
+  KtHttp.create(ApiServiceV3::class.java)
+    .repos(lang = "Kotlin", since = "weekly")
+    .asFlow()
+    .catch { println("Catch exception:$it") }
+    .collect {
+      println("The result is $it")
+    }
+}
+
+suspend fun testFlow2() {
+  KtHttp.create(ApiServiceV3::class.java)
+    .reposFlow(lang = "Kotlin", since = "weekly")
+    .catch { println("Catch exception:$it") }
+    .collect {
+      println("The result is $it")
+    }
 }
