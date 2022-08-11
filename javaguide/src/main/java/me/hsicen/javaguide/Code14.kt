@@ -11,21 +11,21 @@ import java.io.FileOutputStream
  */
 
 fun main() {
-  val path = "./test.txt"
-  writeFile(path)
-  readFile(path)
+    val path = "./test.txt"
+    writeFile(path)
+    readFile(path)
 }
 
 fun readFile(path: String) {
-  val fos = FileInputStream(path)
-  val bytes = ByteArray(1024)
-  while (fos.read(bytes) != -1) {
-    println(bytes)
-  }
+    val fos = FileInputStream(path)
+    val bytes = ByteArray(1024)
+    while (fos.read(bytes) != -1) {
+        println(bytes)
+    }
 }
 
 fun writeFile(path: String) {
-  val os = FileOutputStream(path)
-  val bytes = ByteArray(123)
-  os.write(bytes)
+    val os = FileOutputStream(path)
+    val bytes = ByteArray(123)
+    os.write(bytes)
 }
